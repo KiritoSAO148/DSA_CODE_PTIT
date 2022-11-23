@@ -17,29 +17,29 @@ typedef vector<pi> vii;
 
 const int MOD = (int) 1e9+7;
 
-void solve(string s){
-	stack<char>st;
-	for (char x : s){
-		if (st.empty() || x=='(' || x=='[') st.push(x);
-		else{
-			if (x==')'){
-				if (st.top()=='(' && x==')') st.pop();
-				else{
-					cout << "NO\n"; return;
-				}
-			}
-			if (x==']'){
-				if (st.top()=='[' && x==']') st.pop();
-				else{
-					cout << "NO\n"; return;
-				}
-			}
-		}
+int n,m;
+vi adj[1001];
+int color[1001];
+
+void inp(){
+	cin >> n >> m;
+	for (int i=1; i<=n; i++) adj[i].clear();
+	ms(color,0);
+	for (int i=0; i<m; i++){
+		int x,y; cin >> x >> y;
+		adj[x].pb(y);
 	}
-	if (!st.empty()){
-		cout << "NO\n"; return;
+}
+
+bool dfs (int u){
+	color[u]=1;
+	for (int v : adj[u]){
+		if (color[v]==0){
+			if (dfs(v)) return true;
+		}else if (color[v]==1) return true;
 	}
-	cout << "YES\n";
+	color[u]=2;
+	return false;
 }
 
 int main(){
@@ -51,14 +51,17 @@ int main(){
 	cin.tie(nullptr);
 	cout.tie(nullptr);
 	int t; cin >> t;
-	cin.ignore();
 	while (t--){
-		string s; getline(cin,s);
-		string res="";
-		for (int i=0; i<sz(s); i++){
-			if (s[i]=='(' || s[i]==')' || s[i]=='[' || s[i]==']') res+=s[i];
+		inp();
+		bool ok=false;
+		for (int i=1; i<=n; i++){
+			if (dfs(i)){
+				ok=true;
+				break;
+			}
 		}
-		solve(res);
+		if (ok) cout << "YES\n";
+		else cout << "NO\n";
 	}
 	return 0;
 }

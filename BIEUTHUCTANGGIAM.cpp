@@ -17,31 +17,6 @@ typedef vector<pi> vii;
 
 const int MOD = (int) 1e9+7;
 
-void solve(string s){
-	stack<char>st;
-	for (char x : s){
-		if (st.empty() || x=='(' || x=='[') st.push(x);
-		else{
-			if (x==')'){
-				if (st.top()=='(' && x==')') st.pop();
-				else{
-					cout << "NO\n"; return;
-				}
-			}
-			if (x==']'){
-				if (st.top()=='[' && x==']') st.pop();
-				else{
-					cout << "NO\n"; return;
-				}
-			}
-		}
-	}
-	if (!st.empty()){
-		cout << "NO\n"; return;
-	}
-	cout << "YES\n";
-}
-
 int main(){
 	#ifndef ONLINE_JUDGE
   	freopen("input.txt", "r", stdin);
@@ -51,14 +26,20 @@ int main(){
 	cin.tie(nullptr);
 	cout.tie(nullptr);
 	int t; cin >> t;
-	cin.ignore();
-	while (t--){
-		string s; getline(cin,s);
-		string res="";
-		for (int i=0; i<sz(s); i++){
-			if (s[i]=='(' || s[i]==')' || s[i]=='[' || s[i]==']') res+=s[i];
+	for (int i=1; i<=t; i++){
+		string s; cin >> s;
+		stack<int>st;
+		cout << "Test " << i << ": ";
+		for (int j=0; j<=sz(s); j++){
+			if (s[j]=='I' || j==sz(s)){
+				cout << j+1;
+				while (!st.empty()){
+					cout << st.top();
+					st.pop();
+				}
+			}else if (s[j]=='D') st.push(j+1);
 		}
-		solve(res);
+		cout << "\n";
 	}
 	return 0;
 }
