@@ -18,28 +18,27 @@ typedef vector<pi> vii;
 const int MOD = (int) 1e9+7;
 
 int main(){
-	#ifndef ONLINE_JUDGE
-  	freopen("input.txt", "r", stdin);
-  	freopen("output.txt", "w", stdout);
-  	#endif
-	ios_base::sync_with_stdio(false);
+	ios::sync_with_stdio(false);
 	cin.tie(nullptr);
 	cout.tie(nullptr);
 	int t; cin >> t;
-	for (int i=1; i<=t; i++){
+	int cnt=0;
+	while (t--){
+		++cnt;
 		string s; cin >> s;
+		int n=s.size();
 		stack<int>st;
-		cout << "Test " << i << ": ";
-		for (int j=0; j<=sz(s); j++){
-			if (s[j]=='I' || j==sz(s)){
-				cout << j+1;
+		cout << "Test " << cnt << ": ";
+		for (int i=0; i<=n; i++){
+			if (s[i]=='I' || i==n){
+				cout << i+1;
 				while (!st.empty()){
-					cout << st.top();
-					st.pop();
+					cout << st.top(); st.pop();
 				}
-			}else if (s[j]=='D') st.push(j+1);
+			}else if (s[i]=='D') st.push(i+1);
 		}
 		cout << "\n";
 	}
 	return 0;
 }
+
