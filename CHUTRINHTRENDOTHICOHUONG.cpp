@@ -56,8 +56,7 @@ int main(){
 		bool ok=false;
 		for (int i=1; i<=n; i++){
 			if (dfs(i)){
-				ok=true;
-				break;
+				ok=true; break;
 			}
 		}
 		if (ok) cout << "YES\n";

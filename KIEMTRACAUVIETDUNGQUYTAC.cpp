@@ -17,29 +17,23 @@ typedef vector<pi> vii;
 
 const int MOD = (int) 1e9+7;
 
-void solve(string s){
+string solve (string s){
 	stack<char>st;
 	for (char x : s){
 		if (st.empty() || x=='(' || x=='[') st.push(x);
 		else{
 			if (x==')'){
-				if (st.top()=='(' && x==')') st.pop();
-				else{
-					cout << "NO\n"; return;
-				}
+				if (st.top()=='(') st.pop();
+				else return "NO\n";
 			}
 			if (x==']'){
-				if (st.top()=='[' && x==']') st.pop();
-				else{
-					cout << "NO\n"; return;
-				}
+				if (st.top()=='[') st.pop();
+				else return "NO\n";
 			}
 		}
 	}
-	if (!st.empty()){
-		cout << "NO\n"; return;
-	}
-	cout << "YES\n";
+	if (!st.empty()) return "NO\n";
+	return "YES\n";
 }
 
 int main(){
@@ -55,10 +49,10 @@ int main(){
 	while (t--){
 		string s; getline(cin,s);
 		string res="";
-		for (int i=0; i<sz(s); i++){
-			if (s[i]=='(' || s[i]==')' || s[i]=='[' || s[i]==']') res+=s[i];
+		for (char x : s){
+			if (x=='(' || x==')' || x=='[' || x==']') res+=x;
 		}
-		solve(res);
+		cout << solve(res);
 	}
 	return 0;
 }
