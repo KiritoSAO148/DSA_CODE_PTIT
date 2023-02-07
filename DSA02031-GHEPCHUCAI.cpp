@@ -1,36 +1,25 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-int n, used[30]; char a[30], c;
+char c;
 
-bool check(){
-	for (int i=2; i<n; i++){
-		if (a[i]=='A' && a[i-1]!='E' && a[i+1]!='E') return false;
-		if (a[i]=='E' && a[i-1]!='A' && a[i+1]!='A') return false;
-	}
-	return true;
-}
-
-void in(){
-	for (int i=1; i<=n; i++) cout << a[i];
-	cout << endl;
-}
-
-void Try(int i){
-	char j;
-	for (j='A'; j<=c; j++){
-		if (used[j]==0){
-			a[i]=j;used[j]=1;
-			if (i==n){
-				if (check()) in();
-			}
-			else Try(i+1);
-			used[j]=0;
+bool check (string s){
+	for (int i = 1; i < s.size() - 1; ++i){
+		if (s[i] == 'A' || s[i] == 'E'){
+			if (s[i - 1] != 'A' && s[i + 1] != 'E' && s[i - 1] != 'E' && s[i + 1] != 'A') return true;
 		}
 	}
+	return false;
 }
 
 int main(){
-	cin >> c; n=(c-'A')+1;
-	Try(1);
+	cin >> c;
+	string s = "";
+	for (int i = 'A'; i <= c; ++i) s += (char) i;
+	do{
+		if (!check(s)) cout << s << '\n';
+	}while (next_permutation(s.begin(), s.end()));
+    return 0;
 }
