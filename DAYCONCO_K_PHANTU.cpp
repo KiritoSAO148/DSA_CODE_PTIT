@@ -27,10 +27,10 @@ int main(){
 	while (ok){
 		vector <int> tmp;
 		for (int i = 1; i <= k; ++i) tmp.push_back(b[a[i]]);
-		sort(tmp.begin(), tmp.end());
 		v.push_back(tmp);
 		next();
 	}
+	sort(v.begin(), v.end());
 	for (auto it : v){
 		for (int x : it) cout << x << ' ';
 		cout << '\n';
