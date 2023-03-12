@@ -3,31 +3,22 @@ using namespace std;
 
 using ll = long long;
 
-void solve(ll p){
-	int n=0;
-	ll a[101];
-	if (p==1){
-		cout << p << "\n";
-		return;
-	}
-	if (p<10){
-		cout << p+10 << "\n";
-		return;
-	}
-	for (int i=9; i>1; i--){
-		while (p%i==0){
-			p/=i;
-			a[n++]=i;
+ll solve(ll n){
+	if (n >= 0 && n <= 9) return n;
+	stack <int> st;
+	for (int i = 9; i >= 2 && n > 1; --i){
+		while (n % i == 0){
+			st.push(i);
+			n /= i;
 		}
 	}
-	if (p>10){
-		cout << "-1\n";
-		return;
+	if (n != 1) return -1;
+	ll ans = 0;
+	while (!st.empty()){
+		ans = ans * 10 + st.top();
+		st.pop();
 	}
-	for (int i=n-1; i>=0; i--){
-		cout << a[i];
-	}
-	cout << "\n";
+	return ans;
 }
 
 int main(){
@@ -36,8 +27,8 @@ int main(){
 	cout.tie(nullptr);
 	int t; cin >> t;
 	while (t--){
-		ll p; cin >> p;
-		solve(p);
+		ll n; cin >> n;
+		cout << solve(n) << '\n';
 	}
 	return 0;
 }
