@@ -74,7 +74,7 @@ int main(){
 				Try(i,j);
 			}
 		}
-		sort(all(v));
+		//sort(all(v));
 		if (!sz(v)) cout << "-1\n";
 		else {
 			for (string x : v) cout << x << " ";
