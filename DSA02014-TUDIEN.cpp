@@ -17,7 +17,7 @@ typedef vector<pi> vii;
 
 const int MOD = (int) 1e9+7;
 
-char a[101][101];
+string a[101][101];
 int k,m,n;
 set <string> dict;
 bool used[101][101];
@@ -57,10 +57,6 @@ void Try(int i, int j){
 }
 
 int main(){
-	#ifndef ONLINE_JUDGE
-  	freopen("input.txt", "r", stdin);
-  	freopen("output.txt", "w", stdout);
-  	#endif
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr);
 	cout.tie(nullptr);
